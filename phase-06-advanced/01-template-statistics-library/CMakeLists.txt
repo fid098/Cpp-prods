@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.25)
+project(stats_library VERSION 1.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(stats_library src/main.cpp)
+target_include_directories(stats_library PRIVATE include)
+
+include(FetchContent)
+FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG v1.14.0)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+add_executable(stats_tests tests/test_stats.cpp)
+target_include_directories(stats_tests PRIVATE include)
+target_link_libraries(stats_tests GTest::gtest_main)
+include(GoogleTest)
+gtest_discover_tests(stats_tests)

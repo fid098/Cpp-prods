@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.25)
+project(lambda_backtester VERSION 1.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(lambda_backtester src/main.cpp)
+target_include_directories(lambda_backtester PRIVATE include)
+
+include(FetchContent)
+FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG v1.14.0)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+add_executable(backtester_tests tests/test_backtester.cpp)
+target_include_directories(backtester_tests PRIVATE include)
+target_link_libraries(backtester_tests GTest::gtest_main)
+include(GoogleTest)
+gtest_discover_tests(backtester_tests)
