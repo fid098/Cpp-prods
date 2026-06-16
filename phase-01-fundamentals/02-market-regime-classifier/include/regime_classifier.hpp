@@ -2,7 +2,8 @@
 #include <cmath>
 #include <string>
 
-enum class Regime {
+enum class Regime
+{
     BULL,
     BEAR,
     VOLATILE,
@@ -15,15 +16,44 @@ enum class Regime {
 //   return_pct  >= 1.0  → BULL
 //   return_pct  <= -1.0 → BEAR
 //   otherwise           → FLAT
-inline Regime classify(double return_pct) {
-    // TODO: implement using if/else if/else
-    (void)return_pct;
-    return Regime::FLAT; // placeholder
+
+inline Regime classify(double return_pct)
+{
+    // Done: implement using if/else if/else
+    if (std::abs(return_pct) > 2.0)
+    {
+        return Regime::VOLATILE;
+    }
+    else
+    {
+        if (return_pct >= 1.0)
+        {
+            return Regime::BULL;
+        }
+        else if (return_pct <= -1.0)
+        {
+            return Regime::BEAR;
+        }
+        else
+        {
+            return Regime::FLAT;
+        }
+    }
 }
 
 // Converts a Regime value to its display string.
-inline std::string regime_to_string(Regime r) {
-    // TODO: implement using switch
-    (void)r;
-    return "UNKNOWN"; // placeholder
+inline std::string regime_to_string(Regime r)
+{
+    // Done: implement using switch
+    switch (r)
+    {
+    case Regime::BULL:
+        return "BULL";
+    case Regime::BEAR:
+        return "BEAR";
+    case Regime::VOLATILE:
+        return "VOLATILE";
+    case Regime::FLAT:
+        return "FLAT";
+    }
 }
