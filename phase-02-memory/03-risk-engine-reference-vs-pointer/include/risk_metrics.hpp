@@ -20,15 +20,20 @@ inline void update_by_value(RiskMetrics m,
 // Pass-by-pointer: modifies *m in place. Guard against nullptr.
 inline void update_by_pointer(RiskMetrics* m,
                                double var, double beta, double sharpe) {
-    // TODO: if (!m) return; then set m->var, m->beta, m->sharpe
-    (void)m; (void)var; (void)beta; (void)sharpe;
+    // Done: if (!m) return; then set m->var, m->beta, m->sharpe
+    if (!m){
+        return;
+    }
+    else{
+        m->var = var; m->beta = beta; m->sharpe = sharpe;
+    }
 }
 
 // Pass-by-reference: modifies m directly (no pointer syntax for the caller).
 inline void update_by_reference(RiskMetrics& m,
                                  double var, double beta, double sharpe) {
-    // TODO: set m.var, m.beta, m.sharpe
-    (void)m; (void)var; (void)beta; (void)sharpe;
+    // Done: set m.var, m.beta, m.sharpe
+    m.var = var; m.beta = beta; m.sharpe = sharpe;
 }
 
 // Read-only const ref: returns formatted string, no copy of m.
