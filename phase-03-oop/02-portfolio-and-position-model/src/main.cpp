@@ -1,13 +1,14 @@
 #include <iostream>
 #include "portfolio.hpp"
 
-int main() {
+int main()
+{
     std::cout << "=== Portfolio & Position Model ===\n\n";
 
     Portfolio p;
     p.add_position({"AAPL", 100, 175.0});
     p.add_position({"MSFT", 200, 290.0});
-    p.add_position({"TSLA",  50, 700.0});
+    p.add_position({"TSLA", 50, 700.0});
 
     std::cout << "Original portfolio:\n";
     p.print_report();
@@ -16,6 +17,10 @@ int main() {
     // Copy and mutate
     Portfolio copy = p;
     // TODO: mutate one position in copy; verify original is unchanged
+    copy.add_position({"GOOG", 10, 2800.0});
+    std::cout << "Mutated copy:\n";
+    copy.print_report();
+    std::cout << "Total: " << copy.total_value() << "\n\n";
 
     return 0;
 }
